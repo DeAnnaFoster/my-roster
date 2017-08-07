@@ -1,5 +1,5 @@
 var app = {
   controllers: {
-    teamController: new TeamController()
+    playerController: new PlayerController()
   }
 } 
