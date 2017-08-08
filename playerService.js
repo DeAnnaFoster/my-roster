@@ -1,10 +1,13 @@
 var PlayerService = function (endpointUri, callback) {
 
-    //stores everything
+    //stores everything Here I'm grabbing it
     var playersData = JSON.parse(localStorage.getItem('playersData')) || [];
 
-    //stores my team
-    var myTeam = JSON.parse(localStorage.getItem('myteam')) || [];
+    //stores my team. Here I'm grabbing it
+    var myTeam = [];
+
+    //searches get stored here
+    var tempSearch = [];
 
     //allowed positions and number of players each ?????
     var roster = {
@@ -17,7 +20,7 @@ var PlayerService = function (endpointUri, callback) {
         'QB': 1
     };
 
-    var tempSearch = [];
+    
 
     function saveTeam() {
         localStorage.setItem('myteam', JSON.stringify(myTeam));
@@ -25,6 +28,7 @@ var PlayerService = function (endpointUri, callback) {
 
     function addPlayer(player) {
         myTeam.push(player);
+        console.log(player);
         //TODO: add to roster
         saveTeam();
     }
@@ -35,13 +39,31 @@ var PlayerService = function (endpointUri, callback) {
         saveTeam();
     }
 
-    function getMyTeam(){
-        return myTeam;
+    function loadTeamData(){
+        var localData = JSON.parse(localStorage.getItem('myteam')) || [];
+
+        if (localData.length > 0) {
+            myTeam = localData;
+            // return callback(); //stops here if found.
+            return callback(myTeam);
+        }
+        // }else{
+        //     localStorage.setItem('myteam', JSON.stringify(myTeam));
+        //     callback();
+        // }       
+    }
+
+
+
+    function getTeam() {
+        //return JSON.stringify(this.myTeam);
+        return [];
     }
 
     this.getMyTeam = function () {
-        //let temp = getMyTeam();
-        //return temp;
+        //return getTeam();
+        //return [];
+        return true;
     }
 
     this.saveTeam = function () {
@@ -57,10 +79,9 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     this.getPlayersByTeam = function (teamName) {
-
+        tempSearch = [];
         tempSearch = playersData.filter(function (player) {
             if (player.pro_team == teamName) {
-                //return true;
                 return player;
             }
         })
@@ -69,9 +90,9 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     this.getPlayersByPosition = function (position) {
+        tempSearch = [];
         tempSearch = playersData.filter(function (player) {
             if (player.position == position) {
-                //return true;
                 return player;
             }
         })
@@ -79,10 +100,9 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     this.getPlayersByName = function (name) {
+        tempSearch = [];
         tempSearch = playersData.filter(function (player) {
-            if (player.firstname == name || player.lastname == name ) {
-                //return true;
-                console.log(player);
+            if (player.firstname == name || player.lastname == name) {
                 return player;
             }
         })
@@ -90,8 +110,6 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     function loadPlayersData() {
-        //console.log('Trying this again');
-
         var localData = localStorage.getItem('playersData');
 
         if (localData) {
@@ -119,6 +137,7 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     loadPlayersData();
+    loadTeamData();
 
 
     //this works
@@ -126,12 +145,12 @@ var PlayerService = function (endpointUri, callback) {
     // console.log(tempp);
 
     //this works
-    //  var tempp = this.getPlayersByPosition('WR');
+    // var tempp = this.getPlayersByPosition('WR');
     // console.log(tempp);
 
     //this works
-//    var tempp = this.getPlayersByTeam('MIA');
-//     console.log(tempp);
+    //var tempp = this.getPlayersByTeam('MIA');
+    //console.log(tempp);
 }
 
 

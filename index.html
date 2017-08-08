@@ -19,7 +19,7 @@
             <div class="panel-heading">My Team</div>
             <div class="panel-body">
 
-                <div class="my-team" >
+                <div class="my-team">
 
                     <!-- <div class="player-card" id="">
                         <div class="remove"><button onclick="app.controllers.playerController.removePlayer()">Remove</button></div>
@@ -40,27 +40,42 @@
         <div class="panel panel-default">
             <div class="panel-heading">Search</div>
             <div class="panel-body">
-
                 <div class="row">
-                    <div class="col-xs-12">
-                        <form onsubmit="app.controllers.playerController.find(event)">
+
+                    <div class="col-xs-4">
+                        <form onsubmit="app.controllers.playerController.findByTeam(event)">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <input type="text" name = "searchTerm">
+                                    <input type="text" name="searchTerm">
                                 </div>
-                                <!-- <button type="submit" value="team">Find by Team</button>
-                                <button type="submit" value="name">Find by Name</button>
-                                <button type="submit" value="position">Find by Position</button> -->
-
-                                <button type="submit" onclick="app.controllers.playerController.findByTeam()">Find by Team</button>
-                                <button type="submit" onclick="app.controllers.playerController.findByName()">Find by Name</button>
-                                <button type="submit" onclick="app.controllers.playerController.findByPosition()">Find by Position</button>
+                                <button type="submit" value="team">Find by Team</button>
                             </div>
-
                         </form>
                     </div>
-                </div>
 
+                    <div class="col-xs-4">
+                        <form onsubmit="app.controllers.playerController.findByName(event)">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input type="text" name="searchTerm">
+                                </div>
+                                <button type="submit" value="name">Find by Name</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <form onsubmit="app.controllers.playerController.findByPosition(event)">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input type="text" name="searchTerm">
+                                </div>
+                                <button type="submit" value="position">Find by Position</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </div>
 
@@ -71,14 +86,14 @@
             <div class="panel-heading">NFL Roster</div>
             <div class="panel-body">
 
-                <div class="player-roster">
+                <div class="player-roster" id="search-results">
 
                     <!-- <div class="player-card">
                         <img src="http://s.nflcdn.com/static/content/public/image/fantasy/transparent/200x200/" alt="player image">
                         <div>Name: </div>
                         <div>Position: </div>
                         <div>Team: </div>
-                        <div class="add"><button onclick="app.controllers.playerController.addPlayer()">Add</button></div>
+                        <div class="add"><button onclick="app.controllers.playerController.addToMyTeam()">Add</button></div>
                     </div> -->
 
                 </div>
@@ -89,9 +104,7 @@
 
 
     </div>
-    </div>
-    </div>
-    </div>
+
 
     <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="playerService.js"></script>
