@@ -1,4 +1,27 @@
 .player-card{
     display: inline-block;
     border: 1px solid black;
+    font-size: 10px;
+}
+
+.player-card > img{
+    width: 150px;
+    height: 150px;
+}
+
+.remove{
+    text-align: center;
+}
+
+.add{
+    text-align: center;
+}
+
+.remove > button{
+    text-align: center;
+    background-color: lightcoral;
+}
+
+.add > button{
+    background-color: lightgreen;
 }

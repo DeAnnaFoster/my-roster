@@ -7,33 +7,93 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NFL Roster</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://code.jquery.com/jquery-3.2.1.js">
+    <link rel="shortcut icon" href="/mine.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
     <div class="container-fluid">
-        <div class="panel panel-default">
-            <div class="panel-heading">My NFL Roster</div>
-            <div class="panel-body">
-                <div class="player-roster"> 
-                    <div class="player-card">
-                        <img src="http://s.nflcdn.com/static/content/public/image/fantasy/transparent/200x200/" alt="">
-                        <div>Name: </div>
-                        <div>Position: </div>
-                        <div>Team: </div>
-                    </div>
-                </div>
-                <div class="my-team">   </div>
-                
 
+        <div class="panel panel-default">
+            <div class="panel-heading">My Team</div>
+            <div class="panel-body">
+
+                <div class="my-team" >
+
+                    <!-- <div class="player-card" id="">
+                        <div class="remove"><button onclick="app.controllers.playerController.removePlayer()">Remove</button></div>
+                        <img src="http://s.nflcdn.com/static/content/public/image/fantasy/transparent/200x200/" alt="player image">
+                        <div>Name: Shaky Legs</div>
+                        <div>Position: All Over</div>
+                        <div>Team: TBD</div>
+                        <div class="add"><button onclick="app.controllers.playerController.addPlayer()">Add</button></div>
+                    </div> -->
+
+                </div>
 
             </div>
         </div>
+
+        <!-- put form here for searching-->
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Search</div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form onsubmit="app.controllers.playerController.find(event)">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input type="text" name = "searchTerm">
+                                </div>
+                                <!-- <button type="submit" value="team">Find by Team</button>
+                                <button type="submit" value="name">Find by Name</button>
+                                <button type="submit" value="position">Find by Position</button> -->
+
+                                <button type="submit" onclick="app.controllers.playerController.findByTeam()">Find by Team</button>
+                                <button type="submit" onclick="app.controllers.playerController.findByName()">Find by Name</button>
+                                <button type="submit" onclick="app.controllers.playerController.findByPosition()">Find by Position</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--   -------------            -->
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">NFL Roster</div>
+            <div class="panel-body">
+
+                <div class="player-roster">
+
+                    <!-- <div class="player-card">
+                        <img src="http://s.nflcdn.com/static/content/public/image/fantasy/transparent/200x200/" alt="player image">
+                        <div>Name: </div>
+                        <div>Position: </div>
+                        <div>Team: </div>
+                        <div class="add"><button onclick="app.controllers.playerController.addPlayer()">Add</button></div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    </div>
+    </div>
     </div>
 
-
+    <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="playerService.js"></script>
     <script src="playerController.js"></script>
     <script src="app.js"></script>
