@@ -20,7 +20,9 @@ var PlayerService = function (endpointUri, callback) {
         'QB': 1
     };
 
-    
+
+    loadTeamData();
+
 
     function saveTeam() {
         localStorage.setItem('myteam', JSON.stringify(myTeam));
@@ -28,24 +30,40 @@ var PlayerService = function (endpointUri, callback) {
 
     function addPlayer(player) {
         myTeam.push(player);
-        console.log(player);
         //TODO: add to roster
         saveTeam();
     }
 
-    function removePlayer(player) {
-        myTeam.pop(player);
+    function removePlayer(id) {
+        //myFish.splice(2, 1); // remove 1 item at 2-index position (that is, "drum")
+       //debugger
+        var index = -1;
+        
+
+        for(let i = 0; i < myTeam.length; i++){
+            var playerId = myTeam[i].id;
+
+            if(playerId == id){
+                index = i;
+                break;
+            }
+        }
+
+        if(index != -1){
+            myTeam.splice(index,1);
+        }
+
         //TODO: remove from roster
         saveTeam();
     }
 
-    function loadTeamData(){
+    function loadTeamData() {
         var localData = JSON.parse(localStorage.getItem('myteam')) || [];
 
         if (localData.length > 0) {
             myTeam = localData;
             // return callback(); //stops here if found.
-            return callback(myTeam);
+            //callback(myTeam);
         }
         // }else{
         //     localStorage.setItem('myteam', JSON.stringify(myTeam));
@@ -53,29 +71,33 @@ var PlayerService = function (endpointUri, callback) {
         // }       
     }
 
-
-
-    function getTeam() {
-        //return JSON.stringify(this.myTeam);
-        return [];
+    this.getPlayerById = function (num) {
+        for (let i = 0; i < playersData.length; i++) {
+            if (playersData[i].id == num) {
+                return playersData[i];
+            }
+        }
     }
 
     this.getMyTeam = function () {
         //return getTeam();
         //return [];
-        return true;
+        //return true;
+        //return getTeam(); 
+        console.log(myTeam);
+        return myTeam;
     }
 
     this.saveTeam = function () {
         saveTeam();
     }
 
-    this.addPlayer = function (player) {
-        addPlayer(player);
+    this.addPlayer = function (id) {
+        addPlayer(id);
     }
 
-    this.removePlayer = function (player) {
-        removePlayer(player);
+    this.removePlayer = function (id) {
+        removePlayer(id);
     }
 
     this.getPlayersByTeam = function (teamName) {
@@ -115,7 +137,7 @@ var PlayerService = function (endpointUri, callback) {
         if (localData) {
             playersData = JSON.parse(localData);
             // return callback(); //stops here if found.
-            return callback(playersData);
+            return callback(playersData);//
         }
 
         var url = 'http://bcw-getter.herokuapp.com/?url=';
@@ -137,7 +159,7 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     loadPlayersData();
-    loadTeamData();
+    // loadTeamData();
 
 
     //this works
