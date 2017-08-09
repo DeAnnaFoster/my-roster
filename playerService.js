@@ -9,46 +9,81 @@ var PlayerService = function (endpointUri, callback) {
     //searches get stored here
     var tempSearch = [];
 
-    //allowed positions and number of players each ?????
-    var roster = {
-        'TE': 1,
-        'WR': 2,
-        'RB': 2,
-        'center': 1,
-        'G': 2,
-        'T': 2,
-        'QB': 1
-    };
-
     loadTeamData();
 
     function saveTeam() {
         localStorage.setItem('myteam', JSON.stringify(myTeam));
     }
 
-    function addPlayer(player) {
-        myTeam.push(player);
-        //TODO: add to roster
-        saveTeam();
-    }
-
-    function removePlayer(id) {
+    getPlayerIndex = function (player) {
         var index = -1;
-        
-        for(let i = 0; i < myTeam.length; i++){
-            var playerId = myTeam[i].id;
 
-            if(playerId == id){
+        for (let i = 0; i < myTeam.length; i++) {
+            if (myTeam[i].id == player.id) {
                 index = i;
                 break;
             }
         }
 
-        if(index != -1){
-            myTeam.splice(index,1);
+        return index;
+    }
+
+    //Shoot for one player each position type.
+    findPlayerByPosition = function (player) {
+        var index = -1;
+
+        for (let i = 0; i < myTeam.length; i++) {
+            if (player.position == myTeam[i].position) {
+                index = i;
+                break;
+            }
         }
 
-        //TODO: remove from roster
+        return index;
+    }
+
+    function addPlayer(player) {
+        //get player id to see if already in array - only one instance
+        var index = getPlayerIndex(player);
+
+        if (index != -1) {
+            console.log('Only one instance of a player allowed.');
+            return;
+        }
+
+        //check team size
+        if (myTeam.length < 11) {
+
+            //Shoot for one player each position type. if no others, push and save
+            if (findPlayerByPosition(player) == -1) {
+                myTeam.push(player);
+                //TODO: add to roster
+                saveTeam();
+            } else {
+                console.log('Only one of each player type allowed.');
+            }
+        } else {
+            console.log('Only team size of 11 allowed.');
+        }
+
+    }
+
+    function removePlayer(id) {
+        var index = -1;
+
+        for (let i = 0; i < myTeam.length; i++) {
+            var playerId = myTeam[i].id;
+
+            if (playerId == id) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            myTeam.splice(index, 1);
+        }
+
         saveTeam();
     }
 
@@ -68,20 +103,23 @@ var PlayerService = function (endpointUri, callback) {
         }
     }
 
-    this.getMyTeam = function () {
-        return myTeam;
-    }
-
     this.saveTeam = function () {
         saveTeam();
+        //localStorage.setItem('myteam', JSON.stringify(myTeam));
     }
 
-    this.addPlayer = function (id) {
-        addPlayer(id);
+    this.addPlayer = function (player) {
+        addPlayer(player);
     }
 
     this.removePlayer = function (id) {
         removePlayer(id);
+    }
+
+
+
+    this.getMyTeam = function () {
+        return myTeam;
     }
 
     this.getPlayersByTeam = function (teamName) {
@@ -144,17 +182,7 @@ var PlayerService = function (endpointUri, callback) {
 
     loadPlayersData();
 
-    //this works
-    // var tempp = this.getPlayersByName('Eric');
-    // console.log(tempp);
 
-    //this works
-    // var tempp = this.getPlayersByPosition('WR');
-    // console.log(tempp);
-
-    //this works
-    //var tempp = this.getPlayersByTeam('MIA');
-    //console.log(tempp);
 }
 
 
