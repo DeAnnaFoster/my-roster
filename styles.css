@@ -2,6 +2,7 @@
     display: inline-block;
     border: 1px solid black;
     font-size: 10px;
+    color: black;
 }
 
 .player-card > img{
