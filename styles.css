@@ -25,3 +25,13 @@
 .add > button{
     background-color: lightgreen;
 }
+
+.container-fluid{
+    background-image:url('http://wallpapercave.com/wp/bzXqLiM.jpg');
+    width: 100%;
+    height: 100%;
+}
+
+.panel{
+    background-color: rgba(0,0,0,0.15);
+}
