@@ -162,8 +162,9 @@ var PlayerService = function (endpointUri, callback) {
             return callback(playersData);//
         }
 
+        //endpointUri  http:
         var url = 'http://bcw-getter.herokuapp.com/?url=';
-        var endpointUri = 'http://api.cbssports.com/fantasy/players/list?version=3.0&SPORT=football&response_format=json';
+        var endpointUri = '//api.cbssports.com/fantasy/players/list?version=3.0&SPORT=football&response_format=json';
         var apiUrl = url + encodeURIComponent(endpointUri);
 
         $.getJSON(apiUrl, function (data) { //does this combine  'get & then?'
