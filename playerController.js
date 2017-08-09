@@ -8,23 +8,6 @@ function PlayerController() {
         loading = false;
     }
 
-//#region blarg
-    //     function ready(myteam) {
-    //         loading = false;
-
-    //         //var temp = [];
-    //         //temp = playerService.getMyTeam();
-    // console.log('myteam length: ' + myteam.length)
-
-    //         if (myteam.length > 0) {
-    //             drawMyPlayers(myteam);
-    //         }
-    //     //debugger
-    //         drawMyPlayers(myteam);
-
-    //     }
-//#endregion
-
     //this is to draw searched for players
     function drawPlayers(searchedPlayers) {
         if (searchedPlayers != null) {

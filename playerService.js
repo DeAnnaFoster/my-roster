@@ -1,9 +1,9 @@
 var PlayerService = function (endpointUri, callback) {
 
-    //stores everything Here I'm grabbing it
+    //stores everything in playersData
     var playersData = JSON.parse(localStorage.getItem('playersData')) || [];
 
-    //stores my team. Here I'm grabbing it
+    //stores my team. 
     var myTeam = [];
 
     //searches get stored here
@@ -20,9 +20,7 @@ var PlayerService = function (endpointUri, callback) {
         'QB': 1
     };
 
-
     loadTeamData();
-
 
     function saveTeam() {
         localStorage.setItem('myteam', JSON.stringify(myTeam));
@@ -35,11 +33,8 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     function removePlayer(id) {
-        //myFish.splice(2, 1); // remove 1 item at 2-index position (that is, "drum")
-       //debugger
         var index = -1;
         
-
         for(let i = 0; i < myTeam.length; i++){
             var playerId = myTeam[i].id;
 
@@ -62,13 +57,7 @@ var PlayerService = function (endpointUri, callback) {
 
         if (localData.length > 0) {
             myTeam = localData;
-            // return callback(); //stops here if found.
-            //callback(myTeam);
         }
-        // }else{
-        //     localStorage.setItem('myteam', JSON.stringify(myTeam));
-        //     callback();
-        // }       
     }
 
     this.getPlayerById = function (num) {
@@ -80,11 +69,6 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     this.getMyTeam = function () {
-        //return getTeam();
-        //return [];
-        //return true;
-        //return getTeam(); 
-        console.log(myTeam);
         return myTeam;
     }
 
@@ -159,8 +143,6 @@ var PlayerService = function (endpointUri, callback) {
     }
 
     loadPlayersData();
-    // loadTeamData();
-
 
     //this works
     // var tempp = this.getPlayersByName('Eric');
